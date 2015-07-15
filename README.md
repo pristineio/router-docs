@@ -4,7 +4,7 @@
 This module adds a `docs` method to the express application object. 
 
 ###Usage###
-```
+```js
 var app = express();
 require('router-docs')(app);
 app.get('/twoHunny', function(req, res) {

@@ -3,8 +3,7 @@
   "version": "1.0.2",
   "author": "Pristine Dev Team",
   "description": "Adds JSON API for documentation to express routes",
-  "repository": "git@github.com:pristineio/router-docs.git",
-  "readme": "README.md",
+  "repository": "https://github.com/pristineio/router-docs",
   "keywords": ["express", "documentation", "docs"],
   "license": "MIT"
 }

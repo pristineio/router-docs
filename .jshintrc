@@ -1,0 +1,6 @@
+{
+  "mocha": true,
+  "freeze": true,
+  "node": true,
+  "strict": true
+}

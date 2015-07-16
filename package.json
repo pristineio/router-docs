@@ -1,6 +1,6 @@
 {
   "name": "router-docs",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "Pristine Dev Team",
   "description": "Adds JSON API for documentation to express routes",
   "repository": "https://github.com/pristineio/router-docs",

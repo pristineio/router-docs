@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "author": "Pristine Dev Team",
   "description": "Adds JSON API for documentation to express.js routes",
-  "repository": "git@github.com:pristineio/routerDocs.git",
+  "repository": "git@github.com:pristineio/router-docs.git",
   "readme": "README.md",
-  "publishConfig": {
-    "registry": "http://nexus.vpc/content/repositories/pristine-npm"
-  },
-  "dependencies": {  }
+  "dependencies": { },
+  "license": "MIT"
 }

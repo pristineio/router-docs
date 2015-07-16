@@ -6,4 +6,4 @@ node_modules
 log
 old
 .npmrc
-
+.jshintrc

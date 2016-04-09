@@ -1,0 +1,22 @@
+{
+  "name": "router-docs",
+  "version": "2.0.27",
+  "author": "Pristine Dev Team",
+  "description": "Adds dynamic documentation to express routes",
+  "repository": "https://github.com/pristineio/router-docs",
+  "keywords": [
+    "express",
+    "documentation",
+    "docs"
+  ],
+  "scripts": {
+    "test": "mocha test"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4",
+    "jade": "^1.11.0",
+    "request": "^2.69.0",
+    "tv4": "^1.1.12"
+  }
+}

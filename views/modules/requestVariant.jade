@@ -1,0 +1,65 @@
+div
+  h5= header
+  each variant, i in route.requestVariants
+    if Object.keys(route.requestVariants).length > 1
+      h5= 'Variant ' + (parseInt(i)+1)
+
+    table(class="u-full-width")
+      thead
+        tr
+          th Name
+          th Type
+          th Description
+      tbody
+        each type, property in variant
+          tr
+            td= property
+            td 
+              if firstItem(type).$parentSchemaId
+                a(href="" + firstItem(type).$parentSchemaRef)= '<' + firstItem(type).$parentSchemaId + '>'
+              else
+                if typeof type.type === 'string'
+                  = type.type
+                else if Array.isArray(type.type)
+                  if type.type[0] == '<Enum>'
+                    = niceEnum(type.type)
+                  else
+                    = '[' + type.type + ']'
+                else
+                  - var parentSchemaId = firstItem(type.type).$parentSchemaId
+                  if parentSchemaId
+                    a(href="" + type.$ref)= '<' + parentSchemaId + '>'
+              if type.$required
+                span &nbsp;REQUIRED
+            td
+              if type.description
+                = type.description
+          //- if firstItem(type).$parentSchemaId
+          //-   h5 Subproperties
+          //-   table
+          //-     thead
+          //-       tr
+          //-         th Name
+          //-         th Type
+          //-         th Description
+          //-     tbody
+          //-       each subType, subProperty in type
+          //-         tr
+          //-           td= subProperty
+          //-           td
+          //-             if typeof subType.type === 'string'
+          //-               = subType.type
+          //-             else if Array.isArray(subType.type)
+          //-               if subType.type[0] == '<Enum>'
+          //-                 = niceEnum(subType.type)
+          //-               else
+          //-                 = subType.type
+          //-             else
+          //-               - var parentSchemaId = firstItem(subType.type).$parentSchemaId
+          //-               a(href="" + subType.$ref)= '<' + parentSchemaId + '>'
+          //-             if subType.$required
+          //-               span &nbsp;REQUIRED
+          //-           td
+          //-             if subType.description
+          //-               = subType.description
+

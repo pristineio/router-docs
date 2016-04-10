@@ -50,7 +50,11 @@ function RouterDocs(app, opts) {
       if(Array.isArray(obj.requestBody)) {
         layer.docs.requestBody = obj.requestBody;
       } else {
-        Object.keys(obj.requestBody).forEach(function(x,i) {
+        Object.keys(obj.requestBody).sort(function(a,b) {
+          a = obj.requestBody[a].$required;
+          b = obj.requestBody[b].$required;
+          return a && b ? 0 : !a && b ? 1 : !b && a ? -1 : 0;
+        }).forEach(function(x,i) {
           layer.docs.requestBody[x] = obj.requestBody[x];
         });
       }

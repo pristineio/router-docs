@@ -1,3 +1,17 @@
+-var getTypeString = function(type) {
+-  if(typeof type === 'string') {
+-    return type;
+-  }
+-  if(Array.isArray(type)) {
+-    if(type[0] === '<Enum>') {
+-      return niceEnum(type);
+-    } else {
+-      return '[' + type + ']';
+-    }
+-  }
+-  return false;
+-}
+
 div
   h5= header
   each variant, i in route.requestVariants
@@ -14,21 +28,17 @@ div
         each type, property in variant
           tr
             td= property
-            td 
+            td(style="white-space: pre")
               if firstItem(type).$parentSchemaId
                 a(href="" + firstItem(type).$parentSchemaRef)= '<' + firstItem(type).$parentSchemaId + '>'
               else
-                if typeof type.type === 'string'
-                  = type.type
-                else if Array.isArray(type.type)
-                  if type.type[0] == '<Enum>'
-                    = niceEnum(type.type)
-                  else
-                    = '[' + type.type + ']'
-                else
+                - var typeString = getTypeString(type.type)
+                if !typeString
                   - var parentSchemaId = firstItem(type.type).$parentSchemaId
                   if parentSchemaId
                     a(href="" + type.$ref)= '<' + parentSchemaId + '>'
+                else
+                  = typeString
               if type.$required
                 span &nbsp;REQUIRED
             td

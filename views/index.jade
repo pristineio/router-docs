@@ -4,13 +4,13 @@
 - }
 
 - var niceEnum = function(e) {
--   return e[0] + '[' + e.map(function(x,i) {
+-   return e[0] + '[\n  ' + e.map(function(x,i) {
 -     if(i>0) {
--       return i > 1 ? ' ' + x : x;
+-       return i > 1 ? '\n  ' + x : x;
 -      }
 -    }).filter(function(x) {
 -      return !!x;
--    }) + ']';
+-    }) + '\n]';
 - }
 
 - var objectIsArray = function(obj) {

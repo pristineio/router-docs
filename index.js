@@ -20,6 +20,7 @@ function RouterDocs(app, opts) {
   }
 
   if('disable' in opts) {
+    app.docs = function() { };
     return;
   }
 

@@ -14,7 +14,7 @@ function RouterDocs(app, opts) {
     app.engine('pug', pug.renderFile);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'pug');
-    app.use(express.static(__dirname + '/views'));
+    app.use('/docs', express.static(__dirname + '/views'));
   }
 
   if('disable' in opts) {

@@ -37,7 +37,7 @@ html
           h5= resourceName
           ul
             each route in resource
-              - var routeId = route.title.toLowerCase().replace(/\'/, '').split(' ').join('-')   
+              - var routeId = route.title.toLowerCase().split(' ').join('-')   
               li: a(class="sidebar-nav-i2em", href="#" + routeId)= route.title
       div(class="row")
         div(class="ten columns offset-by-two column")

@@ -15,7 +15,6 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.13.4",
-    "jade": "^1.11.0",
     "pug": "^2.0.0-alpha6",
     "request": "^2.69.0",
     "tv4": "^1.1.12"

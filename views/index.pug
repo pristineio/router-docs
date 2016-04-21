@@ -37,7 +37,7 @@ html
           h5= resourceName
           ul
             each route in resource
-              - var routeId = route.title.toLowerCase().split(' ').join('-')
+              - var routeId = route.title.toLowerCase().replace(/\'/, '').split(' ').join('-')   
               li: a(class="sidebar-nav-i2em", href="#" + routeId)= route.title
       div(class="row")
         div(class="ten columns offset-by-two column")
@@ -46,7 +46,7 @@ html
             each route in resource
               - var payloadTypes = [route.requestVariants, route.requestParameters, route.queryParameters, route.requestBody]
               - var routeId = route.title.toLowerCase().split(' ').join('-')
-              div(id="#{routeId}", class="row")
+              div(id="" + routeId, class="row")
                 div(class="six columns")
                   h2= route.title
                   p= route.description

@@ -1,5 +1,5 @@
 'use strict';
-var jade = require('jade');
+var pug = require('pug');
 var express = require('express');
 var tv4 = require('tv4');
 var util = require('util');
@@ -11,9 +11,9 @@ function RouterDocs(app, opts) {
   opts = opts || {};
 
   if(opts.pretty) {
-    app.engine('jade', jade.renderFile);
+    app.engine('pug', pug.renderFile);
     app.set('views', __dirname + '/views');
-    app.set('view engine', 'jade');
+    app.set('view engine', 'pug');
     app.use('/css', express.static(__dirname + '/views/css'));
     app.use('/img', express.static(__dirname + '/views/img'));
     app.use('/fonts', express.static(__dirname + '/views/fonts'));

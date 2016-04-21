@@ -13,6 +13,11 @@
 -    }) + '\n]';
 - }
 
+- var camelCaseToStandard = function(s) {
+-   s = s.split(/([A-Z][a-z]+)/).filter(function(x) { return x; }).join(' ');
+-   return s.substring(0,1).toUpperCase() + s.substring(1, s.length);
+- }
+
 - var objectIsArray = function(obj) {
 -   return Array.isArray(obj) || 1 + Object.keys(obj).reduce(function(x,y) {
 -     return parseInt(x) + parseInt(y);
@@ -34,7 +39,7 @@ html
     div(class="container")
       nav(class="fix-left")
         each resource, resourceName in routes
-          h5= resourceName
+          h5= camelCaseToStandard(resourceName)
           ul
             each route in resource
               - var routeId = route.title.toLowerCase().split(' ').join('-')   

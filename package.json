@@ -1,6 +1,6 @@
 {
   "name": "router-docs",
-  "version": "2.0.33",
+  "version": "2.0.34",
   "author": "Pristine Dev Team",
   "description": "Adds dynamic documentation to express routes",
   "repository": "https://github.com/pristineio/router-docs",

@@ -19,6 +19,10 @@
 - }
 
 - var objectIsArray = function(obj) {
+-   var keys = Object.keys(obj);
+-   if(keys.length === 0) {
+-     return 0;
+-   }
 -   return Array.isArray(obj) || 1 + Object.keys(obj).reduce(function(x,y) {
 -     return parseInt(x) + parseInt(y);
 -   }) === Object.keys(obj).length;
@@ -42,7 +46,7 @@ html
           h5= camelCaseToStandard(resourceName)
           ul
             each route in resource
-              - var routeId = route.title.toLowerCase().split(' ').join('-')   
+              - var routeId = route.title.toLowerCase().split(' ').join('-')
               li: a(class="sidebar-nav-i2em", href="#" + routeId)= route.title
       div(class="row")
         div(class="ten columns offset-by-two column")
@@ -67,7 +71,7 @@ html
                   - var fullPath = 'https://<' + appLocals.title + '>' + route.path
                   pre: code curl
                     if route.verb !== 'GET'
-                      |  -X 
+                      |  -X
                       = route.verb
 
                     |  https://
@@ -92,4 +96,3 @@ html
                       =JSON.stringify(route.exampleRequest, null, '  ') + '\n'
                       | EOF
               hr
-

@@ -1,4 +1,4 @@
--var getTypeString = function(type) {
+- var getTypeString = function(type) {
 -  if(typeof type === 'string') {
 -    return type;
 -  }
@@ -12,17 +12,17 @@
 -  return false;
 -}
 
-div
+div(style="margin-top: 1rem")
   h5= header
   each variant, i in route.requestVariants
     if Object.keys(route.requestVariants).length > 1
       h5= 'Variant ' + (parseInt(i)+1)
-
     table(class="u-full-width")
       thead
         tr
           th Name
           th Type
+          th Required
           th Description
       tbody
         each type, property in variant
@@ -39,8 +39,9 @@ div
                     a(href="" + type.$ref)= '<' + parentSchemaId + '>'
                 else
                   = typeString
-              if type.$required
-                span &nbsp;REQUIRED
+              td(style="text-align: center")
+                if type.$required
+                  span &#10003;
             td
               if type.description
                 = type.description
@@ -72,4 +73,3 @@ div
           //-           td
           //-             if subType.description
           //-               = subType.description
-

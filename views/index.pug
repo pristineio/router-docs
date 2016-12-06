@@ -28,6 +28,8 @@
 -   }) === Object.keys(obj).length;
 - }
 
+- var headers = ['JSON Payloads', 'Request Parameters', 'Query Parameters', 'JSON Request Object', 'JSON Request']
+
 doctype html
 html
   meta(charset="utf-8")
@@ -38,6 +40,7 @@ html
     link(rel="stylesheet", href="//fonts.googleapis.com/css?family=Raleway:400,300,600")
     link(rel="stylesheet", href="/docs/css/normalize.css")
     link(rel="stylesheet", href="/docs/css/skeleton.css")
+    link(rel="stylesheet", href="/docs/css/label.css")
 
   body(data-language="curl", onload="location.href=(function(){ return '#' + location.href.split('#')[1]; }())")
     div(class="container")
@@ -50,49 +53,90 @@ html
               li: a(class="sidebar-nav-i2em", href="#" + routeId)= route.title
       div(class="row")
         div(class="ten columns offset-by-two column")
-          - var headers = ['JSON Payloads', 'Request Parameters', 'Query Parameters', 'JSON Payload']
           each resource, resourceName in routes
             each route in resource
-              - var payloadTypes = [route.requestVariants, route.requestParameters, route.queryParameters, route.requestBody]
+              - var payloadTypes = [route.requestVariants, route.requestParameters, route.queryParameters, route.requestBody, route.requestArray]
               - var routeId = route.title.toLowerCase().split(' ').join('-')
-              div(id="" + routeId, class="row")
-                div(class="six columns")
-                  h2= route.title
-                  p= route.description
-                  each r in payloadTypes
-                    if r
-                      - header = headers[payloadTypes.indexOf(r)]
-                      if objectIsArray(r)
-                        - route.requestVariants = r
-                      else
-                        - route.requestVariants = [r]
-                      include ./modules/requestVariant.pug
-                div(class="six columns")
-                  - var fullPath = 'https://<' + appLocals.title + '>' + route.path
-                  pre: code curl
-                    if route.verb !== 'GET'
-                      |  -X
-                      = route.verb
 
-                    |  https://
-                    = '<' + appLocals.title + '>'
+              .row(id=routeId)
+                div(class="ten columns")
+                  h2= route.title
+                  if route.description
+                    p= route.description
+                  .label(style="margin: 0 0.5rem 0.5rem 0")= route.verb
+                  span(style="font-family: monospace; font-size: 1.75rem")
+                    | https://api-dev.ps.gs
                     = route.path
 
-                    if route.headers
-                      each header in route.headers
-                        |  \
-                        = '' + '\n'
-                        | -H "
-                        = Object.keys(header)[0] + ': '
-                        = header[Object.keys(header)[0]]
+                  if route.headers
+                    h5(style="margin-top: 1rem") Headers
+                    table(class="u-full-width")
+                      tbody
+                        each header in route.headers
+                          tr
+                            td= Object.keys(header)[0]
+                            td= header[Object.keys(header)[0]]
 
-                    if route.exampleRequest
-                      |  \
-                      = '' + '\n'
-                      | -H "Content-Type: application/json" \
-                      = '' + '\n'
-                      | -d@- &lt;&lt;EOF
-                      ='' + '\n'
-                      =JSON.stringify(route.exampleRequest, null, '  ') + '\n'
-                      | EOF
+                  each r in payloadTypes
+                    if r
+                      - var index = payloadTypes.indexOf(r)
+                      - header = headers[index]
+                      if index === 4
+                        div(style="margin-top: 1rem")
+                          h5
+                            = header
+                            | :&nbsp;Array
+                            = r
+                      else
+                        if objectIsArray(r)
+                          - route.requestVariants = r
+                        else
+                          - route.requestVariants = [r]
+                        include ./modules/requestVariant.pug
+
+                  if route.responseCodes
+                    h5(style="margin-top: 1rem") Response Codes
+                    table(class="u-full-width")
+                      thead
+                        tr
+                          th Code
+                          th Description
+                      tbody
+                        each code in Object.keys(route.responseCodes)
+                          tr
+                            td= code
+                            td= route.responseCodes[code]
+
+
+                  //- - var fullPath = '//<' + appLocals.title + '>' + route.path
+                  //- h5 Example Request
+                  //- pre: code curl
+                  //-   if route.verb !== 'GET'
+                  //-     |  -X
+                  //-     = route.verb
+                  //-   |  https://
+                  //-   = '<' + appLocals.title + '>'
+                  //-   = route.path
+                  //-   if route.headers
+                  //-     each header in route.headers
+                  //-       |  \
+                  //-       = '' + '\n'
+                  //-       | -H "
+                  //-       = Object.keys(header)[0] + ': '
+                  //-       = header[Object.keys(header)[0]]
+                  //-   if route.exampleRequest
+                  //-     |  \
+                  //-     = '' + '\n'
+                  //-     | -H "Content-Type: application/json" \
+                  //-     = '' + '\n'
+                  //-     | -d@- &lt;&lt;EOF
+                  //-     ='' + '\n'
+                  //-     =JSON.stringify(route.exampleRequest, null, '  ') + '\n'
+                  //-     | EOF
+                  //-
+                  //- if route.exampleResponse
+                  //-   h5 Example Response
+                  //-   pre: code
+                  //-     =JSON.stringify(route.exampleResponse, null, '  ')
+
               hr

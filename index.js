@@ -53,10 +53,12 @@ function RouterDocs(app, opts) {
           a = obj.requestBody[a].$required;
           b = obj.requestBody[b].$required;
           return a && b ? 0 : !a && b ? 1 : !b && a ? -1 : 0;
-        }).forEach(function(x,i) {
+        }).forEach(function(x) {
           layer.docs.requestBody[x] = obj.requestBody[x];
         });
       }
+    } else if('requestArray' in obj) {
+      layer.docs.requestArray = obj.requestArray;
     } else if('requestVariants' in obj) {
       layer.docs.requestVariants = {};
       obj.requestVariants.forEach(function(x,i) {
@@ -83,6 +85,9 @@ function RouterDocs(app, opts) {
     }
     if('queryParameters' in obj) {
       layer.docs.queryParameters = obj.queryParameters;
+    }
+    if('responseCodes' in obj) {
+      layer.docs.responseCodes = obj.responseCodes;
     }
     if('exampleResponse' in obj) {
       layer.docs.exampleResponse = obj.exampleResponse;

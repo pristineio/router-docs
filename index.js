@@ -159,7 +159,8 @@ function RouterDocs(app, opts) {
 
 RouterDocs.prototype.render = function(res, routes) {
   res.render('index', {
-    appLocals: {title: 'API Docs', version: '1.0.0'},
+    title: 'API Docs',
+    appLocals: {version: '1.0.0', fqdn: 'api.example.com'},
     routes: routes
   });
 };

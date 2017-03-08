@@ -42,7 +42,7 @@ html
     link(rel="stylesheet", href="/docs/css/skeleton.css")
     link(rel="stylesheet", href="/docs/css/label.css")
 
-  body(data-language="curl", onload="location.href=(function(){ return '#' + location.href.split('#')[1]; }())")
+  body(data-language="curl", onload="if(locationAnchor = window.location.href.split('#')[1]) {window.location='#' + locationAnchor;}")
     div(class="container")
       nav(class="fix-left")
         each resource, resourceName in routes
